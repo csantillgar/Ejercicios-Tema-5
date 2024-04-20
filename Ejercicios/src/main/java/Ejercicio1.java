@@ -1,4 +1,4 @@
-public class SumaNaturales {
+public class Ejercicio1 {
     // Función recursiva para calcular la suma de los n primeros números naturales
     public static int calcularSumaNaturales(int n) {
         // Caso base: cuando n es igual a 0, la suma es 0

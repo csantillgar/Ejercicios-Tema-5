@@ -3,53 +3,70 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Main extends JFrame {
 
     public Main() {
         // Configuración de la ventana
-        setTitle("Suma de los primeros n números naturales");
+        setTitle("Menú de Ejercicios");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 200);
+        setSize(300, 300);
         setLocationRelativeTo(null);
 
         // Panel principal
         JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        panel.setLayout(new GridLayout(5, 1)); // Grid de 5 filas y 1 columna
 
-        // Etiqueta y campo de texto para ingresar el valor de n
-        JLabel label = new JLabel("Ingrese el valor de n:");
-        JTextField textField = new JTextField(10);
+        // Botones para acceder a cada ejercicio
+        JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
+        JButton ejercicio2Button = new JButton("Ejercicio 2: Imprimir lista de números naturales entre a y b");
+        JButton ejercicio3Button = new JButton("Ejercicio 3: Contar cantidad de dígitos de un número entero");
+        JButton ejercicio4Button = new JButton("Ejercicio 4: Calcular x^y mediante multiplicaciones sucesivas");
 
-        // Botón para calcular la suma
-        JButton calcularButton = new JButton("Calcular Suma");
-
-        // Acción del botón
-        calcularButton.addActionListener(new ActionListener() {
+        // Acción del botón para el Ejercicio 1
+        ejercicio1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    // Obtener el valor de n del campo de texto
-                    int n = Integer.parseInt(textField.getText());
-                    // Calcular la suma de los primeros n números naturales
-                    int suma = SumaNaturales.calcularSumaNaturales(n);
-                    // Mostrar el resultado en un cuadro de diálogo
-                    JOptionPane.showMessageDialog(Main.this,
-                            "La suma de los primeros " + n + " números naturales es: " + suma,
-                            "Resultado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(Main.this,
-                            "Por favor, ingrese un número válido para n.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+                int n = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de n:"));
+                int suma = Ejercicio1.calcularSumaNaturales(n);
+                JOptionPane.showMessageDialog(Main.this,
+                        "La suma de los primeros " + n + " números naturales es: " + suma,
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        // Agregar componentes al panel
-        panel.add(label, BorderLayout.NORTH);
-        panel.add(textField, BorderLayout.CENTER);
-        panel.add(calcularButton, BorderLayout.SOUTH);
+        // Implementación del Ejercicio 2
+        ejercicio2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int a = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de a:"));
+                int d = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de d:"));
+                String lista = Ejercicio2.generarLista(a, d);
+                mostrarLista(lista);
+            }
+        });
+
+        // Acción del botón para el Ejercicio 3
+        ejercicio3Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int numero = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese un número entero:"));
+                int cantidadDigitos = Ejercicio3.contarDigitos(Math.abs(numero)); // Usamos Math.abs para obtener el valor absoluto del número
+                JOptionPane.showMessageDialog(Main.this,
+                        "El número " + numero + " tiene " + cantidadDigitos + " dígitos.",
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+
+
+        // Agregar botones al panel
+        panel.add(ejercicio1Button);
+        panel.add(ejercicio2Button);
+        panel.add(ejercicio3Button);
+        panel.add(ejercicio4Button);
 
         // Agregar panel a la ventana
         add(panel);
@@ -57,6 +74,14 @@ public class Main extends JFrame {
         // Hacer visible la ventana
         setVisible(true);
     }
+
+    // Función para mostrar la lista en una ventana
+    public static void mostrarLista(String lista) {
+        JTextArea textArea = new JTextArea(lista);
+        textArea.setEditable(false);
+        JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Lista de Números Naturales", JOptionPane.PLAIN_MESSAGE);
+    }
+
 
     public static void main(String[] args) {
         // Crear una instancia de la clase Main (Interfaz Gráfica)
