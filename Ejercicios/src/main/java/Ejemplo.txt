@@ -8,3 +8,6 @@ El error se maneja correctamente utilizando un bloque try-catch.
 La clase se hereda de otra clase base para reutilizar funcionalidades.
 La interfaz define el contrato que deben cumplir las clases que la implementan.
 El comentario explica el propósito de la función de manera clara y concisa.
+
+
+11011

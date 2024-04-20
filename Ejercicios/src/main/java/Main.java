@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Main extends JFrame {
@@ -208,6 +214,39 @@ public class Main extends JFrame {
             sb.append(bases.charAt(randomIndex));
         }
         return sb.toString();
+    }
+
+    // Método para buscar una palabra en el archivo de texto
+    public String buscarPalabra(String palabra) {
+        try {
+            // Ruta del archivo de texto
+            String nombreArchivo = "ruta/del/archivo.txt";
+
+            // Leer el archivo y almacenar cada línea en una lista
+            List<String> lineas = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo));
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                lineas.add(linea);
+            }
+            reader.close();
+
+            // Ordenar la lista alfabéticamente
+            Collections.sort(lineas);
+
+            // Realizar búsqueda binaria
+            int indice = Collections.binarySearch(lineas, palabra);
+
+            // Construir el mensaje de resultado
+            if (indice >= 0) {
+                return "La palabra '" + palabra + "' se encontró en la línea " + (indice + 1) + ": " + lineas.get(indice);
+            } else {
+                return "La palabra '" + palabra + "' no se encontró en el archivo.";
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return "Error al leer el archivo.";
+        }
     }
 
 

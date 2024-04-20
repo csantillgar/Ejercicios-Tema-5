@@ -1,33 +1,23 @@
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Ejercicio10 {
-    // Método para buscar una palabra en un archivo de texto y devolver el resultado
+
     public static String buscarPalabra(String nombreArchivo, String palabra) {
-        try {
-            FileReader fr = new FileReader(nombreArchivo);
-            BufferedReader br = new BufferedReader(fr);
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            int lineaActual = 0;
             String linea;
-            int numeroLinea = 0;
-            StringBuilder resultado = new StringBuilder();
             while ((linea = br.readLine()) != null) {
-                numeroLinea++;
+                lineaActual++;
+                System.out.println("Línea " + lineaActual + ": " + linea); // Mensaje de depuración
                 if (linea.contains(palabra)) {
-                    resultado.append("La palabra '").append(palabra).append("' se encontró en la línea ").append(numeroLinea).append(": ").append(linea).append("\n");
+                    return "La palabra '" + palabra + "' se encontró en la línea " + lineaActual + ": " + linea;
                 }
             }
-            br.close();
-            fr.close();
-            if (resultado.length() == 0) {
-                return "La palabra '" + palabra + "' no se encontró en el archivo.";
-            } else {
-                return resultado.toString();
-            }
+            return "La palabra '" + palabra + "' no se encontró en el archivo.";
         } catch (IOException e) {
-            e.printStackTrace();
-            return "Error al leer el archivo.";
+            return "Error al leer el archivo: " + e.getMessage();
         }
     }
 }
-
