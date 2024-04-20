@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 public class Main extends JFrame {
@@ -16,12 +18,12 @@ public class Main extends JFrame {
         // Configuración de la ventana
         setTitle("Menú de Ejercicios");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 400);
+        setSize(800, 400);
         setLocationRelativeTo(null);
 
         // Panel principal
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(9, 1)); // Grid de 7 filas y 1 columna
+        panel.setLayout(new GridLayout(6,2)); // Grid de10filas y 1 columna
 
         // Botones para acceder a cada ejercicio
         JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
@@ -34,6 +36,7 @@ public class Main extends JFrame {
         JButton ejercicio8Button = new JButton("Ejercicio 8: Contar genes en una cadena de ADN");
         JButton ejercicio9Button = new JButton("Ejercicio 9: Ordenar archivo de texto alfabéticamente");
         JButton ejercicio10Button = new JButton("Ejercicio 10: Buscar palabra en archivo de texto");
+        JButton ejercicio12Button = new JButton("Ejercicio 12: Ordenar fechas cronológicamente");
 
 
 
@@ -176,7 +179,13 @@ public class Main extends JFrame {
             }
         });
 
-
+        // Acción del botón para el Ejercicio 12
+        ejercicio12Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ordenarFechas();
+            }
+        });
 
 
         // Agregar botones al panel
@@ -190,7 +199,7 @@ public class Main extends JFrame {
         panel.add(ejercicio8Button);
         panel.add(ejercicio9Button);
         panel.add(ejercicio10Button);
-
+        panel.add(ejercicio12Button);
         // Agregar panel a la ventana
         add(panel);
 
@@ -249,6 +258,35 @@ public class Main extends JFrame {
         }
     }
 
+    // Función para ordenar fechas cronológicamente
+    private static void ordenarFechas() {
+        List<Date> fechas = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Ciclo para ingresar fechas
+        while (true) {
+            String input = JOptionPane.showInputDialog(null, "Introduce una fecha en formato dd/MM/yyyy (o escribe 'fin' para terminar):");
+            if (input.equalsIgnoreCase("fin")) {
+                break;
+            }
+            try {
+                Date fecha = dateFormat.parse(input);
+                fechas.add(fecha);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Por favor, usa el formato dd/MM/yyyy.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        // Ordenar las fechas cronológicamente
+        Collections.sort(fechas);
+
+        // Mostrar las fechas ordenadas
+        StringBuilder result = new StringBuilder("Fechas ordenadas cronológicamente:\n");
+        for (Date fecha : fechas) {
+            result.append(dateFormat.format(fecha)).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, result.toString(), "Fechas Ordenadas", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public static void main(String[] args) {
         // Crear una instancia de la clase Main (Interfaz Gráfica)
