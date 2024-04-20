@@ -15,7 +15,7 @@ public class Main extends JFrame {
 
         // Panel principal
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 1)); // Grid de 7 filas y 1 columna
+        panel.setLayout(new GridLayout(8, 1)); // Grid de 7 filas y 1 columna
 
         // Botones para acceder a cada ejercicio
         JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
@@ -24,7 +24,7 @@ public class Main extends JFrame {
         JButton ejercicio4Button = new JButton("Ejercicio 4: Calcular xy mediante multiplicaciones sucesivas");
         JButton ejercicio5Button = new JButton("Ejercicio 5: Encontrar el valor máximo de un vector");
         JButton ejercicio6Button = new JButton("Ejercicio 6: Convertir cadena hexadecimal a decimal");
-
+        JButton ejercicio7Button = new JButton("Ejercicio 7: Calcular C(n, k)");
 
         // Acción del botón para el Ejercicio 1
         ejercicio1Button.addActionListener(new ActionListener() {
@@ -111,6 +111,20 @@ public class Main extends JFrame {
         });
 
 
+        // Acción del botón para el Ejercicio 7
+        ejercicio7Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int n = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de n:"));
+                int k = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de k:"));
+                int resultado = Ejercicio7.calcularCombinacion(n, k);
+                JOptionPane.showMessageDialog(Main.this,
+                        "C(" + n + ", " + k + ") = " + resultado,
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
 
 
         // Agregar botones al panel
@@ -120,6 +134,7 @@ public class Main extends JFrame {
         panel.add(ejercicio4Button);
         panel.add(ejercicio5Button);
         panel.add(ejercicio6Button);
+        panel.add(ejercicio7Button);
 
         // Agregar panel a la ventana
         add(panel);
