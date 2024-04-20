@@ -21,7 +21,7 @@ public class Main extends JFrame {
         JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
         JButton ejercicio2Button = new JButton("Ejercicio 2: Imprimir lista de números naturales entre a y b");
         JButton ejercicio3Button = new JButton("Ejercicio 3: Contar cantidad de dígitos de un número entero");
-        JButton ejercicio4Button = new JButton("Ejercicio 4: Calcular x^y mediante multiplicaciones sucesivas");
+        JButton ejercicio4Button = new JButton("Ejercicio 4: Calcular xy mediante multiplicaciones sucesivas");
 
         // Acción del botón para el Ejercicio 1
         ejercicio1Button.addActionListener(new ActionListener() {
@@ -59,6 +59,21 @@ public class Main extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });
+
+        // Acción del botón para el Ejercicio 4
+        ejercicio4Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int x = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de x:"));
+                int y = Integer.parseInt(JOptionPane.showInputDialog(Main.this, "Ingrese el valor de y:"));
+                int resultado = Ejercicio4.multiplicar(x, y);
+                JOptionPane.showMessageDialog(Main.this,
+                        x + " * " + y + " = " + resultado,
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
 
 
 
