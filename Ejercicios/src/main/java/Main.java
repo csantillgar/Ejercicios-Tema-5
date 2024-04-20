@@ -15,13 +15,14 @@ public class Main extends JFrame {
 
         // Panel principal
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 1)); // Grid de 5 filas y 1 columna
+        panel.setLayout(new GridLayout(6, 1)); // Grid de 6 filas y 1 columna
 
         // Botones para acceder a cada ejercicio
         JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
         JButton ejercicio2Button = new JButton("Ejercicio 2: Imprimir lista de números naturales entre a y b");
         JButton ejercicio3Button = new JButton("Ejercicio 3: Contar cantidad de dígitos de un número entero");
         JButton ejercicio4Button = new JButton("Ejercicio 4: Calcular xy mediante multiplicaciones sucesivas");
+        JButton ejercicio5Button = new JButton("Ejercicio 5: Encontrar el valor máximo de un vector");
 
         // Acción del botón para el Ejercicio 1
         ejercicio1Button.addActionListener(new ActionListener() {
@@ -74,6 +75,26 @@ public class Main extends JFrame {
             }
         });
 
+        // Acción del botón para el Ejercicio 5
+        ejercicio5Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Pide al usuario que ingrese los elementos del vector
+                String input = JOptionPane.showInputDialog(Main.this, "Ingrese los elementos del vector separados por comas:");
+                String[] elementos = input.split(",");
+                int[] vector = new int[elementos.length];
+                for (int i = 0; i < elementos.length; i++) {
+                    vector[i] = Integer.parseInt(elementos[i]);
+                }
+                // Calcula el valor máximo del vector
+                int maximo = Ejercicio5.encontrarMaximo(vector, 0);
+                JOptionPane.showMessageDialog(Main.this,
+                        "El valor máximo del vector es: " + maximo,
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
 
 
 
@@ -82,6 +103,7 @@ public class Main extends JFrame {
         panel.add(ejercicio2Button);
         panel.add(ejercicio3Button);
         panel.add(ejercicio4Button);
+        panel.add(ejercicio5Button);
 
         // Agregar panel a la ventana
         add(panel);
