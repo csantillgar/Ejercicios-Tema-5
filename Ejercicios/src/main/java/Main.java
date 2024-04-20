@@ -10,12 +10,12 @@ public class Main extends JFrame {
         // Configuración de la ventana
         setTitle("Menú de Ejercicios");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 300);
+        setSize(400, 400);
         setLocationRelativeTo(null);
 
         // Panel principal
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(8, 1)); // Grid de 7 filas y 1 columna
+        panel.setLayout(new GridLayout(9, 1)); // Grid de 7 filas y 1 columna
 
         // Botones para acceder a cada ejercicio
         JButton ejercicio1Button = new JButton("Ejercicio 1: Suma de los primeros n números naturales");
@@ -25,6 +25,13 @@ public class Main extends JFrame {
         JButton ejercicio5Button = new JButton("Ejercicio 5: Encontrar el valor máximo de un vector");
         JButton ejercicio6Button = new JButton("Ejercicio 6: Convertir cadena hexadecimal a decimal");
         JButton ejercicio7Button = new JButton("Ejercicio 7: Calcular C(n, k)");
+        JButton ejercicio8Button = new JButton("Ejercicio 8: Contar genes en una cadena de ADN");
+        JButton ejercicio9Button = new JButton("Ejercicio 9: Ordenar archivo de texto alfabéticamente");
+        JButton ejercicio10Button = new JButton("Ejercicio 10: Buscar palabra en archivo de texto");
+
+
+
+
 
         // Acción del botón para el Ejercicio 1
         ejercicio1Button.addActionListener(new ActionListener() {
@@ -125,6 +132,45 @@ public class Main extends JFrame {
             }
         });
 
+        // Acción del botón para el Ejercicio 8
+        ejercicio8Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cadenaADN = generarCadenaADNAleatoria(1000); // Genera una cadena de ADN aleatoria de longitud 1000
+                int genes = Ejercicio8.contarGenes(cadenaADN);
+                JOptionPane.showMessageDialog(Main.this,
+                        "Cadena de ADN generada:\n\n" + cadenaADN + "\n\nNúmero de genes encontrados: " + genes,
+                        "Resultado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        // Acción del botón para el Ejercicio 9
+        ejercicio9Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombreArchivo = "archivo.txt"; // Nombre del archivo de texto a ordenar
+                Ejercicio9.ordenarArchivo("C:\\Users\\cinti\\IdeaProjects\\Ejercicios-Tema-5\\Ejercicios\\src\\main\\java\\Ejemplo.txt");
+
+            }
+        });
+
+        // Acción del botón para el Ejercicio 10
+        ejercicio10Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombreArchivo = "C:\\Users\\cinti\\IdeaProjects\\Ejercicios-Tema-5\\Ejercicios\\src\\main\\java\\Ejemplo.txt";
+                String palabra = JOptionPane.showInputDialog(Main.this, "Ingrese la palabra a buscar:");
+
+                // Buscar la palabra en el archivo y obtener el resultado
+                String resultado = Ejercicio10.buscarPalabra(nombreArchivo, palabra);
+
+                // Mostrar el resultado en un cuadro de diálogo
+                JOptionPane.showMessageDialog(Main.this, resultado, "Resultado de la búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+
 
 
         // Agregar botones al panel
@@ -135,6 +181,9 @@ public class Main extends JFrame {
         panel.add(ejercicio5Button);
         panel.add(ejercicio6Button);
         panel.add(ejercicio7Button);
+        panel.add(ejercicio8Button);
+        panel.add(ejercicio9Button);
+        panel.add(ejercicio10Button);
 
         // Agregar panel a la ventana
         add(panel);
@@ -148,6 +197,17 @@ public class Main extends JFrame {
         JTextArea textArea = new JTextArea(lista);
         textArea.setEditable(false);
         JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Lista de Números Naturales", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    // Función para generar una cadena de ADN aleatoria
+    public static String generarCadenaADNAleatoria(int longitud) {
+        StringBuilder sb = new StringBuilder();
+        String bases = "ACGT";
+        for (int i = 0; i < longitud; i++) {
+            int randomIndex = (int) (Math.random() * bases.length());
+            sb.append(bases.charAt(randomIndex));
+        }
+        return sb.toString();
     }
 
 
